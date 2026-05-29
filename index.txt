@@ -75,7 +75,6 @@
 
   @media (max-width: 768px) { .nav-link { display: none; } }
 
-  /* ✨ 這裡已經幫你改成了乾淨的 banner.png 囉！ */
   .hero-banner {
     position: relative;
     background-image: url('banner.png');
@@ -231,7 +230,8 @@
 
 <nav>
   <a href="#top" class="nav-brand">
-    <img src="無背景logov1.png" alt="織英協會 Logo" class="nav-logo-img">
+    <!-- ✨ Logo 檔名已更新為 logo.png -->
+    <img src="logo.png" alt="織英協會 Logo" class="nav-logo-img">
     <div class="nav-title">
       臺南市織英教育與公益協會
       <span>Tainan Chihying Education and Public Welfare Association</span>
@@ -413,7 +413,8 @@
       </div>
       
       <div class="qr-box">
-        <img src="織英協會官方line.png" alt="LINE QR Code" class="qr-img">
+        <!-- ✨ LINE QR Code 檔名已更新為 line-qr.png -->
+        <img src="line-qr.png" alt="LINE QR Code" class="qr-img">
         <div class="qr-text">掃描加入 LINE</div>
       </div>
     </div>
