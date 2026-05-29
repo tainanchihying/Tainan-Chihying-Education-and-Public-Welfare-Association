@@ -228,7 +228,7 @@
 
   /* 聯絡區塊電腦版排版（左右兩欄） */
   .contact-section { background: var(--chihying-bg-warm); }
-  .contact-box { background: var(--white); border-radius: var(--radius); padding: 48px; margin-top: 40px; border: 1px solid var(--border-color); display: flex; flex-direction: row; gap: 48px; align-items: center; justify-content: space-between; }
+  .contact-box { background: var(--white); border-radius: var(--radius); padding: 48px; margin-top: 40px; border: 1px solid var(--border-color); display: flex; flex-direction: row; gap: 48px; align-items: stretch; justify-content: space-between; }
   
   .contact-info-list { display: flex; flex-direction: column; gap: 24px; flex: 1; }
   .crow { display: flex; align-items: flex-start; gap: 16px; text-decoration: none; color: inherit; transition: opacity 0.2s; }
@@ -237,12 +237,16 @@
   .crow-label { font-size: 13px; color: var(--text-muted); }
   .crow-value { font-size: 18px; font-weight: 500; color: var(--chihying-blue); }
 
-  /* 💻 電腦版 QR Code 容器 */
-  .contact-qr-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 180px; text-align: center; flex-shrink: 0; }
+  /* 💻 電腦版專用非點擊欄位樣式 */
+  .crow-pc-static { pointer-events: none; cursor: default; }
+  .crow-pc-static:hover { opacity: 1; }
+
+  /* 💻 電腦版 QR Code 容器（對齊文字底部，位置更自然不突兀） */
+  .contact-qr-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 180px; text-align: center; flex-shrink: 0; align-self: flex-end; padding-bottom: 8px; }
   .contact-qr-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 10px; }
   .contact-qr-txt { font-size: 14px; color: var(--text-muted); font-weight: 500; }
 
-  /* 📱 綠色直達按鈕預設隱藏（電腦版不顯示） */
+  /* 📱 綠色直達按鈕預設隱藏（電腦版看不到） */
   .btn-line-direct {
     display: none; 
     align-items: center;
@@ -265,8 +269,8 @@
   /* 📱 手機版 RWD 覆蓋邏輯 */
   @media(max-width: 768px) { 
     .contact-box { padding: 28px 20px; flex-direction: column; gap: 32px; } 
-    .contact-qr-box { display: none !important; } /* ✨ 手機版隱藏 QR Code 圖片 */
-    .btn-line-direct { display: inline-flex; } /* ✨ 手機版顯示綠色大按鈕 */
+    .contact-qr-box { display: none !important; } /* 手機版隱藏 QR Code */
+    .btn-line-direct { display: inline-flex; } /* 手機版顯示直達大按鈕 */
   }
   
   footer { background: var(--chihying-blue); color: rgba(255,255,255,0.5); padding: 60px 24px; text-align: center; }
@@ -452,21 +456,22 @@
           </div>
         </a>
         
-        <a href="https://line.me/R/ti/p/%40574anymh" target="_blank" class="crow">
+        <!-- ✨ 這裡改為靜態 div（加了 crow-pc-static 樣式），電腦版不可點選、不會有超連結效果 -->
+        <div class="crow crow-pc-static">
           <div class="crow-icon">💬</div>
           <div>
-            <div class="crow-label">官方 LINE 帳號 (點擊直達)</div>
+            <div class="crow-label">官方 LINE 帳號</div>
             <div class="crow-value">@574anymh</div>
           </div>
-        </a>
+        </div>
 
-        <!-- 📱 手機版專用綠色大按鈕，預設不顯示 -->
+        <!-- 📱 手機版專用綠色直達大按鈕 -->
         <a href="https://line.me/R/ti/p/%40574anymh" target="_blank" class="btn-line-direct">
           <span>💬</span> 點我加入協會官方 LINE
         </a>
       </div>
 
-      <!-- 💻 電腦版專用 QR Code 圖片區塊，預設顯示 -->
+      <!-- 💻 電腦版專用 QR Code 區塊（對齊文字底部，位置不再偏高） -->
       <div class="contact-qr-box">
         <img src="line-qr.png" alt="LINE 官方帳號 QR Code" class="contact-qr-img">
         <div class="contact-qr-txt">掃描加入官方 LINE</div>
