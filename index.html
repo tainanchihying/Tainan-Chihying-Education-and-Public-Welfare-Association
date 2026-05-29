@@ -76,13 +76,13 @@
   }
   .nav-btn:hover { background: var(--chihying-orange-hover); }
 
-  /* 📱 RWD 手機版導覽列與圖片呈現優化 */
+  /* 📱 RWD 手機版導覽列優化 */
   @media (max-width: 768px) { 
-    nav { padding: 12px 16px; justify-content: center; } /* 手機版 logo 置中，看起來更平衡 */
+    nav { padding: 12px 16px; justify-content: center; } 
     .nav-logo-img { height: 38px; } 
     .nav-title { font-size: 15px; } 
     .nav-title span { font-size: 10px; }
-    .nav-link, .nav-btn { display: none !important; } /* ✨ 聽你的，手機版把右上角立即合作徹底拿掉 */
+    .nav-link, .nav-btn { display: none !important; } 
   }
   @media (max-width: 390px) {
     .nav-title span { display: none; } 
@@ -124,10 +124,10 @@
   @media (max-width: 768px) {
     .hero-banner { 
       background-position: center center; 
-      background-size: cover; /* ✨ 讓圖片像手機桌布一樣完全填滿，絕對不留白色底色 */
+      background-size: cover; 
       min-height: 520px; 
     }
-    .hero-banner::before { background: rgba(250, 247, 242, 0.88); } /* 微調遮罩顏色，確保圖片看得到的同時，文字也夠清晰 */
+    .hero-banner::before { background: rgba(250, 247, 242, 0.88); } 
     .btn-sub { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
     .btn-main { display: block; text-align: center; }
   }
@@ -226,18 +226,25 @@
     line-height: 1.6;
   }
 
+  /* 聯絡區塊電腦版排版（左右兩欄） */
   .contact-section { background: var(--chihying-bg-warm); }
-  .contact-box { background: var(--white); border-radius: var(--radius); padding: 48px; margin-top: 40px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 36px; }
+  .contact-box { background: var(--white); border-radius: var(--radius); padding: 48px; margin-top: 40px; border: 1px solid var(--border-color); display: flex; flex-direction: row; gap: 48px; align-items: center; justify-content: space-between; }
   
-  .contact-info-list { display: flex; flex-direction: column; gap: 24px; flex: 1; width: 100%; }
+  .contact-info-list { display: flex; flex-direction: column; gap: 24px; flex: 1; }
   .crow { display: flex; align-items: flex-start; gap: 16px; text-decoration: none; color: inherit; transition: opacity 0.2s; }
   .crow:hover { opacity: 0.85; }
   .crow-icon { font-size: 22px; color: var(--chihying-orange); }
   .crow-label { font-size: 13px; color: var(--text-muted); }
   .crow-value { font-size: 18px; font-weight: 500; color: var(--chihying-blue); }
 
+  /* 💻 電腦版 QR Code 容器 */
+  .contact-qr-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 180px; text-align: center; flex-shrink: 0; }
+  .contact-qr-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 10px; }
+  .contact-qr-txt { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+
+  /* 📱 綠色直達按鈕預設隱藏（電腦版不顯示） */
   .btn-line-direct {
-    display: inline-flex;
+    display: none; 
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -251,13 +258,15 @@
     margin-top: 12px;
     transition: background 0.2s;
     box-shadow: 0 4px 12px rgba(6, 199, 85, 0.2);
-    width: fit-content;
+    width: 100%;
   }
   .btn-line-direct:hover { background: var(--line-green-hover); }
 
+  /* 📱 手機版 RWD 覆蓋邏輯 */
   @media(max-width: 768px) { 
-    .contact-box { padding: 28px 20px; } 
-    .btn-line-direct { width: 100%; } 
+    .contact-box { padding: 28px 20px; flex-direction: column; gap: 32px; } 
+    .contact-qr-box { display: none !important; } /* ✨ 手機版隱藏 QR Code 圖片 */
+    .btn-line-direct { display: inline-flex; } /* ✨ 手機版顯示綠色大按鈕 */
   }
   
   footer { background: var(--chihying-blue); color: rgba(255,255,255,0.5); padding: 60px 24px; text-align: center; }
@@ -451,9 +460,16 @@
           </div>
         </a>
 
+        <!-- 📱 手機版專用綠色大按鈕，預設不顯示 -->
         <a href="https://line.me/R/ti/p/%40574anymh" target="_blank" class="btn-line-direct">
           <span>💬</span> 點我加入協會官方 LINE
         </a>
+      </div>
+
+      <!-- 💻 電腦版專用 QR Code 圖片區塊，預設顯示 -->
+      <div class="contact-qr-box">
+        <img src="line-qr.png" alt="LINE 官方帳號 QR Code" class="contact-qr-img">
+        <div class="contact-qr-txt">掃描加入官方 LINE</div>
       </div>
     </div>
   </div>
