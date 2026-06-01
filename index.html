@@ -23,7 +23,7 @@
     --color-plan1: #C86A28;         
     --color-plan2: #5A734D;         
     --color-plan3: #2C6395;         
-    --color-plan4: #185FA5;         /* ✨ 新增計畫案的藍色 */
+    --color-plan4: #185FA5;         
 
     --serif: 'Noto Serif TC', serif;
     --sans: 'Noto Sans TC', sans-serif;
@@ -77,7 +77,6 @@
   }
   .nav-btn:hover { background: var(--chihying-orange-hover); }
 
-  /* 📱 RWD 手機版導覽列優化 */
   @media (max-width: 768px) { 
     nav { padding: 12px 16px; justify-content: center; } 
     .nav-logo-img { height: 38px; } 
@@ -121,7 +120,6 @@
   .btn-sub { background: rgba(255, 255, 255, 0.7); color: var(--chihying-blue); padding: 14px 32px; border-radius: 30px; text-decoration: none; border: 1px solid var(--chihying-blue); display: inline-block; margin-left: 12px; transition: all 0.2s; backdrop-filter: blur(4px); font-size: 17px; }
   .btn-sub:hover { background: var(--chihying-blue); color: var(--white); }
 
-  /* 📱 手機版 Banner 滿版設定 */
   @media (max-width: 768px) {
     .hero-banner { 
       background-position: center center; 
@@ -156,7 +154,6 @@
   .card h3 { font-family: var(--serif); font-size: 22px; color: var(--chihying-blue); margin-bottom: 14px; }
   .card p { font-size: 16px; color: var(--text-dark); }
 
-  /* 合作方案卡片 Grid 調整（4張卡片時會呈現完美配給） */
   .plans-section { background: var(--white); }
   .pcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); gap: 28px; margin-top: 48px; }
   @media(max-width: 840px) { .pcard-grid { grid-template-columns: 1fr; } }
@@ -180,28 +177,24 @@
   .pcard-meta { font-size: 14.5px; color: var(--text-muted); margin-bottom: 10px; transition: color 0.25s; }
   .plink { font-size: 16.5px; font-weight: 700; color: var(--chihying-blue); display: inline-flex; align-items: center; gap: 4px; transition: color 0.25s; }
 
-  /* 卡片 1 樣式：銀齡 */
   .plan-orange .pcard { border-top: 4px solid var(--color-plan1); }
   .plan-orange .slabel { background: rgba(200, 106, 40, 0.08); color: var(--color-plan1); }
   .plan-orange:hover .pcard { background-color: var(--color-plan1); border-color: var(--color-plan1); transform: translateY(-5px); box-shadow: 0 12px 28px rgba(199, 106, 40, 0.2); }
   .plan-orange:hover .pcard h3, .plan-orange:hover .pcard p, .plan-orange:hover .pcard-meta, .plan-orange:hover .plink { color: var(--white); opacity: 1; }
   .plan-orange:hover .slabel { background: var(--white); color: var(--color-plan1); }
 
-  /* 卡片 2 樣式：未來人才 */
   .plan-green .pcard { border-top: 4px solid var(--color-plan2); }
   .plan-green .slabel { background: rgba(90, 115, 77, 0.08); color: var(--color-plan2); }
   .plan-green:hover .pcard { background-color: var(--color-plan2); border-color: var(--color-plan2); transform: translateY(-5px); box-shadow: 0 12px 28px rgba(90, 115, 77, 0.2); }
   .plan-green:hover .pcard h3, .plan-green:hover .pcard p, .plan-green:hover .pcard-meta, .plan-green:hover .plink { color: var(--white); opacity: 1; }
   .plan-green:hover .slabel { background: var(--white); color: var(--color-plan2); }
 
-  /* 卡片 3 樣式：ESG 報告書 */
   .plan-blue .pcard { border-top: 4px solid var(--color-plan3); }
   .plan-blue .slabel { background: rgba(44, 99, 149, 0.08); color: var(--color-plan3); }
   .plan-blue:hover .pcard { background-color: var(--color-plan3); border-color: var(--color-plan3); transform: translateY(-5px); box-shadow: 0 12px 28px rgba(44, 99, 149, 0.2); }
   .plan-blue:hover .pcard h3, .plan-blue:hover .pcard p, .plan-blue:hover .pcard-meta, .plan-blue:hover .plink { color: var(--white); opacity: 1; }
   .plan-blue:hover .slabel { background: var(--white); color: var(--color-plan3); }
 
-  /* ✨ 卡片 4 樣式：新卡片 政府計畫案申請 */
   .plan-darkblue .pcard { border-top: 4px solid var(--color-plan4); }
   .plan-darkblue .slabel { background: #EAF3F8; color: var(--color-plan4); }
   .plan-darkblue:hover .pcard { background-color: var(--color-plan4); border-color: var(--color-plan4); transform: translateY(-5px); box-shadow: 0 12px 28px rgba(24, 95, 165, 0.2); }
@@ -240,7 +233,6 @@
     line-height: 1.6;
   }
 
-  /* 聯絡區塊電腦版排版 */
   .contact-section { background: var(--chihying-bg-warm); }
   .contact-box { background: var(--white); border-radius: var(--radius); padding: 48px; margin-top: 40px; border: 1px solid var(--border-color); display: flex; flex-direction: row; gap: 48px; align-items: stretch; justify-content: space-between; }
   
@@ -251,16 +243,13 @@
   .crow-label { font-size: 13px; color: var(--text-muted); }
   .crow-value { font-size: 18px; font-weight: 500; color: var(--chihying-blue); }
 
-  /* 💻 電腦版專用非點擊欄位樣式 */
   .crow-pc-static { pointer-events: none; cursor: default; }
   .crow-pc-static:hover { opacity: 1; }
 
-  /* 💻 電腦版 QR Code 容器 */
   .contact-qr-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 180px; text-align: center; flex-shrink: 0; align-self: flex-end; padding-bottom: 8px; }
   .contact-qr-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 10px; }
   .contact-qr-txt { font-size: 14px; color: var(--text-muted); font-weight: 500; }
 
-  /* 📱 綠色直達按鈕預設隱藏 */
   .btn-line-direct {
     display: none; 
     align-items: center;
@@ -280,7 +269,6 @@
   }
   .btn-line-direct:hover { background: var(--line-green-hover); }
 
-  /* 📱 手機版 RWD 覆蓋邏輯 */
   @media(max-width: 768px) { 
     .contact-box { padding: 28px 20px; flex-direction: column; gap: 32px; } 
     .contact-qr-box { display: none !important; } 
@@ -355,7 +343,6 @@
     <p class="ssub">選擇適合的切入點，讓一筆預算同時創造企業、社團與社會的雙向價值。</p>
     
     <div class="pcard-grid">
-      <!-- 方案 1：銀齡安心 -->
       <a href="https://tainanchihying.github.io/Silver-Care-Support-Program/" target="_blank" class="pcard-link plan-orange">
         <div class="pcard">
           <div class="pcard-body">
@@ -370,7 +357,6 @@
         </div>
       </a>
       
-      <!-- 方案 2：未來人才 -->
       <a href="https://tainanchihying.github.io/Talent-Future-Impact-Program/" target="_blank" class="pcard-link plan-green">
         <div class="pcard">
           <div class="pcard-body">
@@ -385,7 +371,6 @@
         </div>
       </a>
 
-      <!-- 方案 3：ESG 報告書 -->
       <a href="#contact" class="pcard-link plan-blue">
         <div class="pcard">
           <div class="pcard-body">
@@ -400,7 +385,6 @@
         </div>
       </a>
 
-      <!-- ✨ 新增方案 4：政府計畫案申請 -->
       <a href="#contact" class="pcard-link plan-darkblue">
         <div class="pcard">
           <div class="pcard-body">
@@ -496,13 +480,11 @@
           </div>
         </div>
 
-        <!-- 📱 手機版專用綠色直達大按鈕 -->
         <a href="https://line.me/R/ti/p/%40574anymh" target="_blank" class="btn-line-direct">
           <span>💬</span> 點我加入協會官方 LINE
         </a>
       </div>
 
-      <!-- 💻 電腦版專用 QR Code 區塊 -->
       <div class="contact-qr-box">
         <img src="line-qr.png" alt="LINE 官方帳號 QR Code" class="contact-qr-img">
         <div class="contact-qr-txt">掃描加入官方 LINE</div>
@@ -521,6 +503,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // 1. 漸顯動畫偵測
     const revealSections = document.querySelectorAll('.reveal-section');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -531,15 +514,19 @@
       });
     }, {
       root: null,
-      threshold: 0.15,
-      rootMargin: "0px 0px -50px 0px"
+      threshold: 0.05, // 降低門檻，避免強行拉動頁面
+      rootMargin: "0px 0px -20px 0px"
     });
 
     revealSections.forEach(section => {
       revealObserver.observe(section);
     });
 
+    // 2. 數字跑馬燈動畫函數
     const startCounting = (counterElement) => {
+      if (counterElement.classList.contains('counted')) return; // 防止重複觸發
+      counterElement.classList.add('counted');
+      
       const target = parseInt(counterElement.getAttribute('data-target'), 10);
       const duration = 1800; 
       const startTime = performance.now();
@@ -559,28 +546,28 @@
         }
       };
       
-      setTimeout(() => {
-        requestAnimationFrame(updateNumber);
-      }, 200);
+      requestAnimationFrame(updateNumber);
     };
 
-    const impactCards = document.querySelectorAll('.impact-card');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const cardCounters = entry.target.querySelectorAll('.counter');
-          cardCounters.forEach(counter => startCounting(counter));
-          counterObserver.unobserve(entry.target);
-        }
+    // ✨ 修正：使用更安全的偵測方式，避免載入時頁面被強行往下扯
+    const impactGrid = document.querySelector('.impact-grid');
+    if (impactGrid) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cardCounters = entry.target.querySelectorAll('.counter');
+            cardCounters.forEach(counter => startCounting(counter));
+            counterObserver.unobserve(entry.target); // 跑完就解綁，最安全
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.05, // 低觸發點，只要進入視野邊緣就安全啟動，不會強制滾動頁面
+        rootMargin: "0px 0px 50px 0px"
       });
-    }, {
-      root: null,
-      threshold: 0.6 
-    });
 
-    impactCards.forEach(card => {
-      counterObserver.observe(card);
-    });
+      counterObserver.observe(impactGrid);
+    }
   });
 </script>
 
