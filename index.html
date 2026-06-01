@@ -371,7 +371,6 @@
         </div>
       </a>
 
-      <!-- ✨ 關鍵改動：這裡改成 javascript:void(0) 並用 class="js-scroll-trigger" 來觸發，徹底封死瀏覽器的載入跳轉 Bug -->
       <a href="javascript:void(0);" class="pcard-link plan-blue js-scroll-trigger">
         <div class="pcard">
           <div class="pcard-body">
@@ -386,7 +385,6 @@
         </div>
       </a>
 
-      <!-- ✨ 關鍵改動二：同上，移除 href="#contact" 防止任何非預期的頁面拉扯 -->
       <a href="javascript:void(0);" class="pcard-link plan-darkblue js-scroll-trigger">
         <div class="pcard">
           <div class="pcard-body">
@@ -404,6 +402,7 @@
   </div>
 </section>
 
+<!-- ✨ 這裡加上了特別的防護措施，絕對不允許它的 JavaScript 偷偷去搶奪視窗焦點 -->
 <section id="impact" class="impact-section reveal-section">
   <div class="container">
     <div class="slabel">Impact</div>
@@ -414,7 +413,7 @@
       <div class="impact-card">
         <div class="impact-number"><span class="counter" data-target="18">0</span> × <span class="counter" data-target="36">0</span></div>
         <div class="impact-title">師資與學生</div>
-        <p>支持 18 位師資，穩定陪伴 36名學生</p>
+        <p>支持 18 位師資，穩定陪伴 36 名學生</p>
       </div>
 
       <div class="impact-card">
@@ -432,7 +431,7 @@
       <div class="impact-card">
         <div class="impact-number"><span class="counter" data-target="262">0</span></div>
         <div class="impact-title">間學校</div>
-        <p>擴大禮物卡資源支持，讓溫慢進入更多校園</p>
+        <p>擴大禮物卡資源支持，讓溫暖進入更多校園</p>
       </div>
 
       <div class="impact-card">
@@ -504,14 +503,18 @@
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // 1. 強制重設滾動軸位置
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
+  // ✨ 終極防護核心：使用最高等級的強制手段，在載入時凍結所有原生滾動可能
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
 
-    // 2. 用安全的方式處理卡片的點擊跳轉，不污染 href 屬性
+  document.addEventListener("DOMContentLoaded", () => {
+    // 再次確保剛進網頁時絕對死守在座標最頂端（0, 0）
+    window.scrollTo(0, 0);
+    setTimeout(() => { window.scrollTo(0, 0); }, 50);
+
+    // 1. 卡片平滑點擊處理
     const scrollTriggers = document.querySelectorAll('.js-scroll-trigger');
     scrollTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
@@ -523,7 +526,7 @@
       });
     });
 
-    // 3. 漸顯動畫偵測
+    // 2. 區塊漸顯動畫偵測
     const revealSections = document.querySelectorAll('.reveal-section');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -536,7 +539,7 @@
 
     revealSections.forEach(section => revealObserver.observe(section));
 
-    // 4. 跑馬燈動畫
+    // 3. 跑馬燈數字增加動畫函數
     const startCounting = (counterElement) => {
       if (counterElement.classList.contains('counted')) return;
       counterElement.classList.add('counted');
@@ -562,21 +565,32 @@
       requestAnimationFrame(updateNumber);
     };
 
-    const counters = document.querySelectorAll('.counter');
-    const checkScrollForCounters = () => {
-      if (counters.length === 0) return;
+    // ✨ 徹底重寫數字動畫的發動時機！
+    // 徹底廢除舊的 window.scroll 監聽（因為它在網頁未完全載入、高度縮在一起時會誤判發動，進而拉扯整個網頁畫面）
+    // 改用全新、最安全的 IntersectionObserver，並且加上延遲保護
+    setTimeout(() => {
+      const counters = document.querySelectorAll('.counter');
       const impactSection = document.getElementById('impact');
-      if (!impactSection) return;
       
-      const rect = impactSection.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 50) {
-        counters.forEach(counter => startCounting(counter));
-        window.removeEventListener('scroll', checkScrollForCounters);
-      }
-    };
+      if (counters.length > 0 && impactSection) {
+        const counterObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // 只有當使用者手指「真的滑到」這個區塊、眼睛看得到它時，才靜悄悄地跑數字，絕對不干擾畫面滾動
+              counters.forEach(counter => startCounting(counter));
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        }, { root: null, rootMargin: "0px 0px -20px 0px" });
 
-    window.addEventListener('scroll', checkScrollForCounters);
-    setTimeout(checkScrollForCounters, 400);
+        counterObserver.observe(impactSection);
+      }
+    }, 600); // 延遲 0.6 秒啟動觀測，確保網頁初始渲染完全定格
+  });
+  
+  // 網頁完全載入完畢（含圖片）的最後一道物理置頂保險
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
   });
 </script>
 
