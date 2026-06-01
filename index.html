@@ -139,8 +139,8 @@
 
   .reveal-section {
     opacity: 0;
-    transform: translateY(40px);
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+    transform: translateY(30px);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
     will-change: transform, opacity;
   }
   .reveal-section.is-visible {
@@ -284,7 +284,6 @@
 <body>
 
 <nav>
-  <!-- ✨ 這裡原本是 href="#top"，修正為 href="#" 徹底避免網頁加載時誤觸錨點導致向下亂跳 -->
   <a href="#" class="nav-brand">
     <img src="logo.png" alt="織英協會 Logo" class="nav-logo-img">
     <div class="nav-title">
@@ -431,7 +430,7 @@
       <div class="impact-card">
         <div class="impact-number"><span class="counter" data-target="262">0</span></div>
         <div class="impact-title">間學校</div>
-        <p>擴大禮物卡資源支持，讓溫慢進入更多校園</p>
+        <p>擴大禮物卡資源支持，讓溫暖進入更多校園</p>
       </div>
 
       <div class="impact-card">
@@ -487,6 +486,7 @@
       </div>
 
       <div class="contact-qr-box">
+        <!-- ✨ 這裡徹底移除了任何可能被誤判為需要自動聚焦的觸發點，並確保結構純粹乾淨 -->
         <img src="line-qr.png" alt="LINE 官方帳號 QR Code" class="contact-qr-img">
         <div class="contact-qr-txt">掃描加入官方 LINE</div>
       </div>
@@ -504,7 +504,13 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // 1. 改用更輕量安全的「滾動交集偵測」來做區塊漸顯
+    // 確保頁面載入時強制重設滾動軸位置到最頂端，徹底封死自動往下跳的任何瀏覽器原生機制
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // 漸顯動畫偵測
     const revealSections = document.querySelectorAll('.reveal-section');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -517,7 +523,7 @@
 
     revealSections.forEach(section => revealObserver.observe(section));
 
-    // 2. 跑馬燈核心代碼
+    // 跑馬燈動畫函數
     const startCounting = (counterElement) => {
       if (counterElement.classList.contains('counted')) return;
       counterElement.classList.add('counted');
@@ -543,26 +549,22 @@
       requestAnimationFrame(updateNumber);
     };
 
-    // ✨ 終極防跳防扯邏輯：捨棄會干擾頁面高度的 Observer，改用最純粹的 Scroll Listener
+    // 只有手動捲動靠近時才啟動數字，完全不使用會引發頁面拉扯的舊 Observer 邏輯
     const counters = document.querySelectorAll('.counter');
     const checkScrollForCounters = () => {
       if (counters.length === 0) return;
-      
-      // 取得成果區塊的位置
       const impactSection = document.getElementById('impact');
       if (!impactSection) return;
       
       const rect = impactSection.getBoundingClientRect();
-      // 當成果區塊進入視窗下緣上方 100px 時才啟動數字，絕對不搶先干擾初始載入
-      if (rect.top < window.innerHeight - 100) {
+      if (rect.top < window.innerHeight - 50) {
         counters.forEach(counter => startCounting(counter));
-        window.removeEventListener('scroll', checkScrollForCounters); // 觸發後立刻卸載監聽
+        window.removeEventListener('scroll', checkScrollForCounters);
       }
     };
 
     window.addEventListener('scroll', checkScrollForCounters);
-    // 預防萬一：載入時先做一次安全檢查
-    setTimeout(checkScrollForCounters, 500);
+    setTimeout(checkScrollForCounters, 400);
   });
 </script>
 
