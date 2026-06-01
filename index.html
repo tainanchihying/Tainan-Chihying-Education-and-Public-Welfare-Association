@@ -139,8 +139,8 @@
 
   .reveal-section {
     opacity: 0;
-    transform: translateY(60px);
-    transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.85s ease;
+    transform: translateY(40px);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
     will-change: transform, opacity;
   }
   .reveal-section.is-visible {
@@ -284,7 +284,8 @@
 <body>
 
 <nav>
-  <a href="#top" class="nav-brand">
+  <!-- ✨ 這裡原本是 href="#top"，修正為 href="#" 徹底避免網頁加載時誤觸錨點導致向下亂跳 -->
+  <a href="#" class="nav-brand">
     <img src="logo.png" alt="織英協會 Logo" class="nav-logo-img">
     <div class="nav-title">
       臺南市織英教育與公益協會
@@ -299,7 +300,7 @@
   </div>
 </nav>
 
-<div class="hero-banner" id="top">
+<div class="hero-banner">
   <div class="banner-container">
     <div class="hero-text">
       <div class="slabel">臺南在地 · 公益行動</div>
@@ -430,7 +431,7 @@
       <div class="impact-card">
         <div class="impact-number"><span class="counter" data-target="262">0</span></div>
         <div class="impact-title">間學校</div>
-        <p>擴大禮物卡資源支持，讓溫暖進入更多校園</p>
+        <p>擴大禮物卡資源支持，讓溫慢進入更多校園</p>
       </div>
 
       <div class="impact-card">
@@ -503,7 +504,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // 1. 漸顯動畫偵測
+    // 1. 改用更輕量安全的「滾動交集偵測」來做區塊漸顯
     const revealSections = document.querySelectorAll('.reveal-section');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -512,23 +513,17 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, {
-      root: null,
-      threshold: 0.05, // 降低門檻，避免強行拉動頁面
-      rootMargin: "0px 0px -20px 0px"
-    });
+    }, { root: null, rootMargin: "0px 0px -40px 0px" });
 
-    revealSections.forEach(section => {
-      revealObserver.observe(section);
-    });
+    revealSections.forEach(section => revealObserver.observe(section));
 
-    // 2. 數字跑馬燈動畫函數
+    // 2. 跑馬燈核心代碼
     const startCounting = (counterElement) => {
-      if (counterElement.classList.contains('counted')) return; // 防止重複觸發
+      if (counterElement.classList.contains('counted')) return;
       counterElement.classList.add('counted');
       
       const target = parseInt(counterElement.getAttribute('data-target'), 10);
-      const duration = 1800; 
+      const duration = 1600; 
       const startTime = performance.now();
       
       const updateNumber = (currentTime) => {
@@ -545,29 +540,29 @@
           counterElement.textContent = target;
         }
       };
-      
       requestAnimationFrame(updateNumber);
     };
 
-    // ✨ 修正：使用更安全的偵測方式，避免載入時頁面被強行往下扯
-    const impactGrid = document.querySelector('.impact-grid');
-    if (impactGrid) {
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const cardCounters = entry.target.querySelectorAll('.counter');
-            cardCounters.forEach(counter => startCounting(counter));
-            counterObserver.unobserve(entry.target); // 跑完就解綁，最安全
-          }
-        });
-      }, {
-        root: null,
-        threshold: 0.05, // 低觸發點，只要進入視野邊緣就安全啟動，不會強制滾動頁面
-        rootMargin: "0px 0px 50px 0px"
-      });
+    // ✨ 終極防跳防扯邏輯：捨棄會干擾頁面高度的 Observer，改用最純粹的 Scroll Listener
+    const counters = document.querySelectorAll('.counter');
+    const checkScrollForCounters = () => {
+      if (counters.length === 0) return;
+      
+      // 取得成果區塊的位置
+      const impactSection = document.getElementById('impact');
+      if (!impactSection) return;
+      
+      const rect = impactSection.getBoundingClientRect();
+      // 當成果區塊進入視窗下緣上方 100px 時才啟動數字，絕對不搶先干擾初始載入
+      if (rect.top < window.innerHeight - 100) {
+        counters.forEach(counter => startCounting(counter));
+        window.removeEventListener('scroll', checkScrollForCounters); // 觸發後立刻卸載監聽
+      }
+    };
 
-      counterObserver.observe(impactGrid);
-    }
+    window.addEventListener('scroll', checkScrollForCounters);
+    // 預防萬一：載入時先做一次安全檢查
+    setTimeout(checkScrollForCounters, 500);
   });
 </script>
 
