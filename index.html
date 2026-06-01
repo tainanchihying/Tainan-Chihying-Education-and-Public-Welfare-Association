@@ -61,7 +61,7 @@
   .nav-title span { display: block; font-size: 12px; font-weight: 400; color: var(--text-muted); font-family: var(--sans); }
   
   .nav-menu { display: flex; align-items: center; gap: 24px; }
-  .nav-link { font-size: 16px; color: var(--text-dark); text-decoration: none; transition: color 0.2s; }
+  .nav-link { font-size: 16px; color: var(--text-dark); text-decoration: none; transition: color 0.2s; cursor: pointer; }
   .nav-link:hover { color: var(--chihying-orange); }
   
   .nav-btn { 
@@ -74,6 +74,7 @@
     text-decoration: none; 
     transition: background 0.2s; 
     white-space: nowrap;
+    cursor: pointer;
   }
   .nav-btn:hover { background: var(--chihying-orange-hover); }
 
@@ -115,9 +116,9 @@
   .hero-text h1 em { font-style: normal; color: var(--chihying-orange); }
   .hero-text p { font-size: 19px; color: var(--text-dark); margin-bottom: 36px; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.6); }
   
-  .btn-main { background: var(--chihying-orange); color: var(--white); padding: 14px 32px; border-radius: 30px; text-decoration: none; font-weight: 500; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2); font-size: 17px; }
+  .btn-main { background: var(--chihying-orange); color: var(--white); padding: 14px 32px; border-radius: 30px; text-decoration: none; font-weight: 500; display: inline-block; transition: background 0.2s; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2); font-size: 17px; cursor: pointer; }
   .btn-main:hover { background: var(--chihying-orange-hover); }
-  .btn-sub { background: rgba(255, 255, 255, 0.7); color: var(--chihying-blue); padding: 14px 32px; border-radius: 30px; text-decoration: none; border: 1px solid var(--chihying-blue); display: inline-block; margin-left: 12px; transition: all 0.2s; backdrop-filter: blur(4px); font-size: 17px; }
+  .btn-sub { background: rgba(255, 255, 255, 0.7); color: var(--chihying-blue); padding: 14px 32px; border-radius: 30px; text-decoration: none; border: 1px solid var(--chihying-blue); display: inline-block; margin-left: 12px; transition: all 0.2s; backdrop-filter: blur(4px); font-size: 17px; cursor: pointer; }
   .btn-sub:hover { background: var(--chihying-blue); color: var(--white); }
 
   @media (max-width: 768px) {
@@ -284,7 +285,8 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-brand">
+  <!-- ✨ 修正一：主 Logo 連結安全化 -->
+  <a href="javascript:void(0);" class="nav-brand" onclick="window.scrollTo({top:0, behavior:'smooth'});">
     <img src="logo.png" alt="織英協會 Logo" class="nav-logo-img">
     <div class="nav-title">
       臺南市織英教育與公益協會
@@ -292,10 +294,11 @@
     </div>
   </a>
   <div class="nav-menu">
-    <a href="#services" class="nav-link">三大服務</a>
-    <a href="#plans" class="nav-link">合作方案</a>
-    <a href="#impact" class="nav-link">社會影響力</a>
-    <a href="#contact" class="nav-btn">立即合作</a>
+    <!-- ✨ 修正二：導覽列全面換成 javascript:void(0) 並綁定自訂滾動目標，徹底拔除 # 號拉扯 -->
+    <a href="javascript:void(0);" class="nav-link" data-scroll-target="services">三大服務</a>
+    <a href="javascript:void(0);" class="nav-link" data-scroll-target="plans">合作方案</a>
+    <a href="javascript:void(0);" class="nav-link" data-scroll-target="impact">社會影響力</a>
+    <a href="javascript:void(0);" class="nav-btn" data-scroll-target="contact">立即合作</a>
   </div>
 </nav>
 
@@ -306,13 +309,15 @@
       <h1>織結資源，<br>推動<em>共好的行動</em></h1>
       <p>我們串聯教育、公益與社會資源，陪伴個人、學校、企業與社群，一起推動能回應社會需求的教育與公益行動。</p>
       <div class="hero-btns">
-        <a href="#services" class="btn-main">了解服務項目</a>
-        <a href="#contact" class="btn-sub">聯繫我們</a>
+        <!-- ✨ 修正三：Banner 按鈕同步安全化 -->
+        <a href="javascript:void(0);" class="btn-main" data-scroll-target="services">了解服務項目</a>
+        <a href="javascript:void(0);" class="btn-sub" data-scroll-target="contact">聯繫我們</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ✨ 核心安全設計：保留 Section 的 id 供 JS 辨識位置，但因為 HTML 裡已經沒有任何 href="#..." 去呼叫它，瀏覽器絕對無法在加載時強行定位 -->
 <section id="services" class="services-section reveal-section">
   <div class="container">
     <div class="slabel">Services</div>
@@ -371,7 +376,7 @@
         </div>
       </a>
 
-      <a href="javascript:void(0);" class="pcard-link plan-blue js-scroll-trigger">
+      <a href="javascript:void(0);" class="pcard-link plan-blue" data-scroll-target="contact">
         <div class="pcard">
           <div class="pcard-body">
             <span class="slabel" style="font-size:12px; padding: 2px 14px; margin-bottom: 0;">跨域資源整合</span>
@@ -385,7 +390,7 @@
         </div>
       </a>
 
-      <a href="javascript:void(0);" class="pcard-link plan-darkblue js-scroll-trigger">
+      <a href="javascript:void(0);" class="pcard-link plan-darkblue" data-scroll-target="contact">
         <div class="pcard">
           <div class="pcard-body">
             <span class="slabel" style="font-size:12px; padding: 2px 14px; margin-bottom: 0;">跨域資源整合</span>
@@ -402,7 +407,6 @@
   </div>
 </section>
 
-<!-- ✨ 這裡加上了特別的防護措施，絕對不允許它的 JavaScript 偷偷去搶奪視窗焦點 -->
 <section id="impact" class="impact-section reveal-section">
   <div class="container">
     <div class="slabel">Impact</div>
@@ -503,25 +507,26 @@
 </footer>
 
 <script>
-  // ✨ 終極防護核心：使用最高等級的強制手段，在載入時凍結所有原生滾動可能
+  // 最高等級的強制置頂：完全凍結瀏覽器的預設定位記憶
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
   window.scrollTo(0, 0);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // 再次確保剛進網頁時絕對死守在座標最頂端（0, 0）
+    // 再次雙重保險鎖死座標在 (0, 0)
     window.scrollTo(0, 0);
-    setTimeout(() => { window.scrollTo(0, 0); }, 50);
 
-    // 1. 卡片平滑點擊處理
-    const scrollTriggers = document.querySelectorAll('.js-scroll-trigger');
-    scrollTriggers.forEach(trigger => {
-      trigger.addEventListener('click', (e) => {
+    // ✨ 終極優化：全面接管點擊事件
+    // 尋找所有帶有 data-scroll-target 屬性的按鈕與連結
+    const scrollButtons = document.querySelectorAll('[data-scroll-target]');
+    scrollButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
+        const targetId = btn.getAttribute('data-scroll-target');
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
@@ -539,7 +544,7 @@
 
     revealSections.forEach(section => revealObserver.observe(section));
 
-    // 3. 跑馬燈數字增加動畫函數
+    // 3. 跑馬燈數字增加動畫
     const startCounting = (counterElement) => {
       if (counterElement.classList.contains('counted')) return;
       counterElement.classList.add('counted');
@@ -565,9 +570,7 @@
       requestAnimationFrame(updateNumber);
     };
 
-    // ✨ 徹底重寫數字動畫的發動時機！
-    // 徹底廢除舊的 window.scroll 監聽（因為它在網頁未完全載入、高度縮在一起時會誤判發動，進而拉扯整個網頁畫面）
-    // 改用全新、最安全的 IntersectionObserver，並且加上延遲保護
+    // 安全的跑馬燈偵測
     setTimeout(() => {
       const counters = document.querySelectorAll('.counter');
       const impactSection = document.getElementById('impact');
@@ -576,7 +579,6 @@
         const counterObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              // 只有當使用者手指「真的滑到」這個區塊、眼睛看得到它時，才靜悄悄地跑數字，絕對不干擾畫面滾動
               counters.forEach(counter => startCounting(counter));
               counterObserver.unobserve(entry.target);
             }
@@ -585,10 +587,10 @@
 
         counterObserver.observe(impactSection);
       }
-    }, 600); // 延遲 0.6 秒啟動觀測，確保網頁初始渲染完全定格
+    }, 400);
   });
   
-  // 網頁完全載入完畢（含圖片）的最後一道物理置頂保險
+  // 網頁最終完全就緒的最後一道鎖
   window.addEventListener('load', () => {
     window.scrollTo(0, 0);
   });
