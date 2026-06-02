@@ -9,6 +9,42 @@
     content="臺南市織英教育與公益協會串聯教育、公益與社會資源，陪伴個人、學校、企業與社群，把善意轉化為能真正落地的行動。"
   />
 
+  <script>
+    (function () {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      function isMobileWidth() {
+        return window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
+      }
+
+      function forceTopOnMobile() {
+        if (!isMobileWidth() || location.hash) return;
+        document.documentElement.style.scrollBehavior = "auto";
+        document.body && (document.body.style.scrollBehavior = "auto");
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body && (document.body.scrollTop = 0);
+      }
+
+      if (!location.hash) {
+        forceTopOnMobile();
+        window.addEventListener("DOMContentLoaded", forceTopOnMobile);
+        window.addEventListener("load", function () {
+          forceTopOnMobile();
+          setTimeout(forceTopOnMobile, 80);
+          setTimeout(forceTopOnMobile, 260);
+          setTimeout(forceTopOnMobile, 600);
+        });
+        window.addEventListener("pageshow", function () {
+          forceTopOnMobile();
+          setTimeout(forceTopOnMobile, 120);
+        });
+      }
+    })();
+  </script>
+
   <style>
     :root {
       --chihying-blue: #2a5b8c;
@@ -1462,12 +1498,60 @@
       }
     }
 
+
+    /* v11：只在手機版調整教育／公益／ESG呈現，電腦版維持原本三卡 */
+    @media (max-width: 640px) {
+      .hero-mini-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        max-width: none !important;
+        margin-top: 22px !important;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(42, 91, 140, 0.1);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(38, 50, 56, 0.04);
+      }
+
+      .hero-mini-card {
+        display: grid !important;
+        grid-template-columns: 52px 1fr !important;
+        align-items: center !important;
+        text-align: left !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-bottom: 1px solid rgba(42, 91, 140, 0.1) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 13px 16px !important;
+      }
+
+      .hero-mini-card:last-child {
+        border-bottom: 0 !important;
+      }
+
+      .hero-mini-card strong {
+        color: var(--chihying-orange) !important;
+        font-size: 17px !important;
+        margin-bottom: 0 !important;
+      }
+
+      .hero-mini-card span {
+        color: var(--text-soft) !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        font-weight: 700 !important;
+      }
+    }
+
   </style>
   <!-- 首頁主視覺圖已內嵌在 CSS，測試時不需要另外上傳 banner 圖。 -->
   <!-- v6：導覽左右貼齊、聯絡改 LINE 按鈕、手機版與成果數字已修正。 -->
   <!-- v7：電腦版保留 LINE QR，手機版改 LINE 按鈕，重整回頂端修正。 -->
   <!-- v8：LINE QR Code 已內嵌，不需要另外上傳 line-qr.png。 -->
   <!-- v9：電腦版恢復 LINE QR 卡片，手機版保留 LINE 按鈕。 -->
+  <!-- v11：電腦版維持 v9，只有手機版重整與三項小卡調整。 -->
 </head>
 
 <body>
