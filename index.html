@@ -6,7 +6,7 @@
   <title>臺南市織英教育與公益協會｜教育公益與社會資源整合</title>
   <meta
     name="description"
-    content="臺南市織英教育與公益協會串聯教育、公益與社會資源，陪伴個人、學校、企業與社群，把善意轉化為能真正落地的行動。"
+    content="臺南市織英教育與公益協會串聯校園、企業與公益資源，推動校園公益與人才培力、ESG 報告書撰寫、年度顧問交流與專案申請協作。"
   />
 
   <script>
@@ -430,9 +430,9 @@
 
     .hero-mini-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      max-width: 560px;
+      max-width: 720px;
       margin: 24px auto 0;
     }
 
@@ -1294,7 +1294,7 @@
       }
 
       .hero-mini-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
@@ -1440,7 +1440,7 @@
 
       .hero-impact .hero-mini-grid {
         display: grid !important;
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 8px !important;
         width: 100% !important;
         max-width: none !important;
@@ -1550,6 +1550,23 @@
       }
     }
 
+
+    /* Four-keyword impact cards */
+    .hero-mini-grid {
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 720px;
+    }
+
+    @media (max-width: 640px) {
+      .hero-impact .hero-mini-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .hero-impact .hero-mini-card span {
+        white-space: normal !important;
+      }
+    }
+
   </style>
   <!-- Clean final: desktop locked from v9; mobile-only fixes organized at bottom. -->
   <!-- clean copy line-break adjustments only -->
@@ -1619,6 +1636,10 @@
                 <strong>ESG</strong>
                 <span>資源整合</span>
               </div>
+              <div class="hero-mini-card">
+                <strong>交流</strong>
+                <span>顧問連結</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1633,20 +1654,20 @@
 
         <div class="service-grid">
           <article class="service-card">
-            <div class="service-icon">❤️</div>
-            <h3>公益行動支持</h3>
+            <div class="service-icon">🎓</div>
+            <h3>校園公益與人才培力</h3>
             <p>
-              精準連結公益需求與外部支持資源，協助社區弱勢群體，
-              讓每一份善意都能穩健落地、發揮最大價值。
+              結合校園教育、公益參與與人才培力，提供客製化課程與實作陪伴工作坊，
+              陪伴學生從學習走向行動，培養關懷社會、解決問題與公共參與的能力。
             </p>
           </article>
 
           <article class="service-card">
             <div class="service-icon">👥</div>
-            <h3>人才培力發展</h3>
+            <h3>年度顧問交流</h3>
             <p>
-              提供客製化課程與實作陪伴工作坊，深入走進校園與基層社區，
-              全方位培育具備解決問題能力的青年人才。
+              以協會顧問名義串聯企業主、專業人士與公益夥伴，透過年度交流活動，
+              促進人脈拓展、資源連結與合作機會。
             </p>
           </article>
 
@@ -1669,23 +1690,13 @@
         <p class="ssub">選擇適合的切入點，讓一筆預算同時創造企業、社團與社會的雙向價值。</p>
 
         <div class="program-grid">
-          <a class="program-card orange" href="https://tainanchihying.github.io/Silver-Care-Support-Program/" target="_blank" rel="noopener">
-            <span class="program-tag">公益行動支持</span>
-            <h3>銀齡安心支持計畫</h3>
-            <p>
-              主動補足長照資源的自付額缺口，<br class="mobile-break" />協助中低收入戶長輩即時取得輔具<br class="mobile-break" />與居家安全環境改善。
-            </p>
-            <div class="program-meta">4 種合作方案 · 5萬 – 50萬</div>
-            <span class="program-link">了解詳情 ➔</span>
-          </a>
-
           <a class="program-card green" href="https://tainanchihying.github.io/Talent-Future-Impact-Program/" target="_blank" rel="noopener">
-            <span class="program-tag">人才培力發展</span>
-            <h3>企業留才 × 未來人才共好培力</h3>
+            <span class="program-tag">校園公益培力</span>
+            <h3>校園公益 × 未來人才培力</h3>
             <p>
-              結合企業內部員工心理韌性訓練，同時支持校園新世代人才發展，直接對應 SDGs 永續揭露指標。
+              結合校園教育、公益參與與人才培力，陪伴學生透過課程、活動與實作行動，培養關懷社會、解決問題與公共參與的能力。
             </p>
-            <div class="program-meta">2 種合作方案 · 9.8萬 – 18.8萬</div>
+            <div class="program-meta">校園公益合作 · 歡迎洽談</div>
             <span class="program-link">了解詳情 ➔</span>
           </a>
 
@@ -1699,8 +1710,18 @@
             <span class="program-link">了解詳情 ➔</span>
           </a>
 
+          <a class="program-card orange" href="#contact">
+            <span class="program-tag">顧問交流連結</span>
+            <h3>年度顧問交流邀請</h3>
+            <p>
+              邀請企業主與專業夥伴以年度顧問身份參與協會交流活動，透過人脈拓展、資源連結與公益參與，建立長期合作網絡。
+            </p>
+            <div class="program-meta">年度交流活動 · 歡迎洽談</div>
+            <span class="program-link">聯絡洽談 ➔</span>
+          </a>
+
           <a class="program-card blue" href="#contact">
-            <span class="program-tag">跨域資源整合</span>
+            <span class="program-tag">專案申請協作</span>
             <h3>政府計畫案申請</h3>
             <p>
               協助企業、學校與組織盤點需求、整理申請條件與計畫亮點，撰寫可送審、可執行的政府計畫案。
